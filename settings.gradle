@@ -101,3 +101,7 @@ project(":code/beresneva-julia-lcd-digits").name = "beresneva-julia-lcd-digits-M
 // Three dimensional shapes area calculation
 include "code/three-dimensional-shapes-area"
 project(":code/three-dimensional-shapes-area").name = "three-dimensional-shapes-area"
+
+// 3D shapes volume
+include "code/shape-volume-calculator"
+project(":code/shape-volume-calculator").name = "shape-volume-calculator"
