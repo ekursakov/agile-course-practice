@@ -8,7 +8,7 @@ public class CuboidVolumeTest {
     private static final double EPSILON = 1e-4;
 
     @Test
-    public void whenZeroSizeThenZeroVolume() {
+    public void whenZeroSideThenZeroVolume() {
         Cuboid cuboid = new Cuboid(0.0, 6.0, 1.0);
 
         double volume = cuboid.getVolume();
