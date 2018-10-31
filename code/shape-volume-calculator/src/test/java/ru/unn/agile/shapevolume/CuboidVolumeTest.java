@@ -22,7 +22,7 @@ public class CuboidVolumeTest {
 
         double volume = cuboid.getVolume();
 
-        assertEquals(6.0, volume, EPSILON);
+        assertEquals(24.0, volume, EPSILON);
     }
 
     @Test(expected = IllegalArgumentException.class)
