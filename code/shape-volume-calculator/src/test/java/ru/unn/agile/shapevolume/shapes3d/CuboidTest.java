@@ -1,11 +1,12 @@
-package ru.unn.agile.shapevolume;
+package ru.unn.agile.shapevolume.shapes3d;
 
 import org.junit.Test;
+import ru.unn.agile.shapevolume.shapes3d.Cuboid;
 
 import static org.junit.Assert.*;
+import static ru.unn.agile.shapevolume.TestConstants.EPSILON;
 
-public class CuboidVolumeTest {
-    private static final double EPSILON = 1e-4;
+public class CuboidTest {
 
     @Test
     public void whenZeroSideThenZeroVolume() {

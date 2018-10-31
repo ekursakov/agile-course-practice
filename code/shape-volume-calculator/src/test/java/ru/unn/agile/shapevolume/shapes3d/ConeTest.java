@@ -1,12 +1,12 @@
-package ru.unn.agile.shapevolume;
+package ru.unn.agile.shapevolume.shapes3d;
 
 import org.junit.Test;
+import ru.unn.agile.shapevolume.shapes3d.Cone;
 
 import static org.junit.Assert.assertEquals;
+import static ru.unn.agile.shapevolume.TestConstants.EPSILON;
 
-public class ConeVolumeTest {
-    private static final double EPSILON = 1e-4;
-
+public class ConeTest {
     @Test
     public void whenZeroRadiusThenZeroVolume() {
         Cone cuboid = new Cone(0.0, 5.0);
