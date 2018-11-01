@@ -1,4 +1,4 @@
-package ru.unn.agile.shapevolume.shapes3d;
+package ru.unn.agile.shapevolume;
 
 import static ru.unn.agile.shapevolume.ShapeVolumeConstants.ERROR_SIZE_MUST_BE_NOT_NEGATIVE;
 

@@ -1,7 +1,6 @@
-package ru.unn.agile.shapevolume.shapes3d;
+package ru.unn.agile.shapevolume;
 
 import org.junit.Test;
-import ru.unn.agile.shapevolume.shapes3d.Cone;
 
 import static org.junit.Assert.assertEquals;
 import static ru.unn.agile.shapevolume.TestConstants.EPSILON;
