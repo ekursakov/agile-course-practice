@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1"
+            xmlns="http://javafx.com/javafx/8.0.121"
+            fx:controller="ru.unn.agile.shape3darea.view.AreaCalculator"
+            prefWidth="400"
+            prefHeight="400">
+    <center>
+        <VBox spacing="10.0">
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+            </padding>
+            <HBox alignment="BASELINE_LEFT" spacing="10">
+                <Label text="Shape:"/>
+                <ComboBox fx:id="cbShape" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+            </HBox>
+            <TableView fx:id="tvParameters">
+                <columns>
+                    <TableColumn text="Key"/>
+                    <TableColumn text="Value"/>
+                </columns>
+            </TableView>
+            <Button fx:id="btnCalc" maxWidth="Infinity" text="Calculate"/>
+            <Label fx:id="lbResult"/>
+        </VBox>
+    </center>
+</BorderPane>

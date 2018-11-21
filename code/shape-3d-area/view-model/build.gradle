@@ -1,0 +1,3 @@
+dependencies {
+    compile project(':shape-3d-area-model')
+}
