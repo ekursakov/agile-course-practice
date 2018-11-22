@@ -5,10 +5,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
+import ru.unn.agile.shape3darea.model.ShapeType;
+import ru.unn.agile.shape3darea.viewmodel.ViewModel;
 
 public class AreaCalculator {
     @FXML
-    private ComboBox cbShape;
+    private ViewModel viewModel;
+    @FXML
+    private ComboBox<ShapeType> cbSelectedShape;
     @FXML
     private TableView tvParameters;
     @FXML
@@ -18,6 +22,6 @@ public class AreaCalculator {
 
     @FXML
     void initialize() {
-        // TODO
+        cbSelectedShape.valueProperty().bindBidirectional(viewModel.selectedShapeProperty());
     }
 }
