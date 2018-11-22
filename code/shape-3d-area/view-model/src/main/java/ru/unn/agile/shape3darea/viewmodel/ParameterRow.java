@@ -1,27 +1,37 @@
 package ru.unn.agile.shape3darea.viewmodel;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import ru.unn.agile.shape3darea.model.ShapeParameter;
 
 import java.util.Objects;
 
 public class ParameterRow {
     private final ShapeParameter shapeParameter;
-    private Object value;
+    private final StringProperty value = new SimpleStringProperty("");
 
     public ParameterRow(ShapeParameter shapeParameter) {
         this.shapeParameter = shapeParameter;
     }
 
-    public ShapeParameter getShapeParameter() {
-        return shapeParameter;
+    public Class<?> getType() {
+        return shapeParameter.getType();
     }
 
-    public Object getValue() {
+    public String getName() {
+        return shapeParameter.getName();
+    }
+
+    public String getValue() {
+        return value.get();
+    }
+
+    public StringProperty valueProperty() {
         return value;
     }
 
-    public void setValue(Object value) {
-        this.value = value;
+    public void setValue(String value) {
+        this.value.set(value);
     }
 
     @Override

@@ -23,5 +23,7 @@ public class AreaCalculator {
     @FXML
     void initialize() {
         cbSelectedShape.valueProperty().bindBidirectional(viewModel.selectedShapeProperty());
+
+        btnCalc.setOnAction(event -> viewModel.calculate());
     }
 }

@@ -2,6 +2,8 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.control.cell.TextFieldTableCell?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -26,10 +28,21 @@
                           HBox.hgrow="ALWAYS"
                           items="${viewModel.shapes}"/>
             </HBox>
-            <TableView fx:id="tvParameters">
+            <TableView fx:id="tvParameters" editable="true" items="${viewModel.parameters}">
                 <columns>
-                    <TableColumn text="Key"/>
-                    <TableColumn text="Value"/>
+                    <TableColumn text="Name">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="name"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Value">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="value"/>
+                        </cellValueFactory>
+                        <cellFactory>
+                            <TextFieldTableCell fx:factory="forTableColumn"/>
+                        </cellFactory>
+                    </TableColumn>
                 </columns>
             </TableView>
             <Button fx:id="btnCalc" maxWidth="Infinity" text="Calculate"/>
