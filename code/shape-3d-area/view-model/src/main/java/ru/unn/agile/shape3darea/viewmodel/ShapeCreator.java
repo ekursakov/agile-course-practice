@@ -8,7 +8,7 @@ import java.util.List;
 
 class ShapeCreator {
 
-    Shape create(Class<? extends Shape> shapeClass, List<ShapeParameter> parameters) {
+    Shape create(final Class<? extends Shape> shapeClass, final List<ShapeParameter> parameters) {
         Class<?>[] parameterTypes = new Class[parameters.size()];
         Object[] parameterValues = new Object[parameters.size()];
         for (int i = 0; i < parameters.size(); i++) {
@@ -28,7 +28,8 @@ class ShapeCreator {
         }
 
         try {
-            Constructor<? extends Shape> constructor = shapeClass.getDeclaredConstructor(parameterTypes);
+            Constructor<? extends Shape> constructor
+                    = shapeClass.getDeclaredConstructor(parameterTypes);
             return constructor.newInstance(parameterValues);
         } catch (NoSuchMethodException | IllegalAccessException | InstantiationException e) {
             throw new IllegalArgumentException("Can't find constructor for supplied parameters", e);

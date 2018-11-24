@@ -45,7 +45,7 @@ public class ShapeCreatorTest {
         Shape shape = creator.create(DoubleParamShape.class, singletonList(param));
 
         assertTrue(shape instanceof DoubleParamShape);
-        assertEquals(42, ((DoubleParamShape) shape).param, DELTA);
+        assertEquals(42, ((DoubleParamShape) shape).getParam(), DELTA);
     }
 
     @Test
@@ -56,7 +56,7 @@ public class ShapeCreatorTest {
         Shape shape = creator.create(IntParamShape.class, singletonList(param));
 
         assertTrue(shape instanceof IntParamShape);
-        assertEquals(10, ((IntParamShape) shape).param);
+        assertEquals(10, ((IntParamShape) shape).getParam());
     }
 
     @Test
@@ -104,30 +104,38 @@ public class ShapeCreatorTest {
     }
 
     static class EmptyShape extends TestShape {
-        public EmptyShape() {
+        EmptyShape() {
         }
     }
 
     static class DoubleParamShape extends TestShape {
-        double param;
+        private final double param;
 
-        public DoubleParamShape(double param) {
+        DoubleParamShape(final double param) {
             this.param = param;
+        }
+
+        double getParam() {
+            return param;
         }
     }
 
     static class IntParamShape extends TestShape {
-        int param;
+        private final int param;
 
-        public IntParamShape(int param) {
+        IntParamShape(final int param) {
             this.param = param;
+        }
+
+        int getParam() {
+            return param;
         }
     }
 
     static class StringParamShape extends TestShape {
-        String param;
+        private final String param;
 
-        public StringParamShape(String param) {
+        StringParamShape(final String param) {
             this.param = param;
         }
     }

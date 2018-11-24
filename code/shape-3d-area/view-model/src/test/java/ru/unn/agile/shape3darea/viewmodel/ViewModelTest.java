@@ -88,15 +88,4 @@ public class ViewModelTest {
         assertEquals(Status.OK.toString(), viewModel.getStatus());
         assertEquals("12.566370614359172", viewModel.getResult());
     }
-
-    @Test
-    public void whenCalculateInvalidInputAndChangeShapeAndValidInputThenShowResult() {
-        viewModel.calculate();
-        viewModel.setSelectedShape(ShapeType.SPHERE);
-        viewModel.getParameters().get(0).setValue("1");
-        viewModel.calculate();
-
-        assertEquals(Status.OK.toString(), viewModel.getStatus());
-        assertEquals("12.566370614359172", viewModel.getResult());
-    }
 }

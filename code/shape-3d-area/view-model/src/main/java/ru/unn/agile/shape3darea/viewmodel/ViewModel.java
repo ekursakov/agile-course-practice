@@ -22,7 +22,9 @@ public final class ViewModel {
 
     private final ShapeCreator shapeCreator = new ShapeCreator();
 
-    private final ObservableList<ShapeType> shapes = FXCollections.observableList(Arrays.asList(ShapeType.values()));
+    private final ObservableList<ShapeType> shapes = FXCollections.observableList(
+            Arrays.asList(ShapeType.values())
+    );
 
     private final ObjectProperty<ShapeType> selectedShape = new SimpleObjectProperty<>();
     private final ObservableList<ShapeParameter> parameters = FXCollections.observableArrayList();
@@ -38,7 +40,7 @@ public final class ViewModel {
         status.set(Status.OK.toString());
     }
 
-    private void updateParameters(ShapeType shapeType) {
+    private void updateParameters(final ShapeType shapeType) {
         switch (shapeType) {
             case SQUARE_PYRAMID:
                 parameters.setAll(Arrays.asList(
@@ -49,6 +51,8 @@ public final class ViewModel {
             case SPHERE:
                 parameters.setAll(singletonList(new ShapeParameter(double.class, RADIUS)));
                 break;
+            default:
+                throw new IllegalStateException("Invalid shape type: " + selectedShape.get());
         }
     }
 
@@ -60,7 +64,7 @@ public final class ViewModel {
         return selectedShape.get();
     }
 
-    public void setSelectedShape(ShapeType selectedShape) {
+    public void setSelectedShape(final ShapeType selectedShape) {
         this.selectedShape.set(selectedShape);
     }
 
@@ -98,6 +102,8 @@ public final class ViewModel {
                 case SPHERE:
                     shapeClass = Sphere.class;
                     break;
+                default:
+                    throw new IllegalStateException("Invalid shape type: " + selectedShape.get());
             }
             Shape shape = shapeCreator.create(shapeClass, parameters);
             result.set(String.valueOf(shape.getArea()));
