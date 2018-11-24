@@ -41,6 +41,8 @@ public class ViewModelTest {
     @Test
     public void whenCalculateWithEmptyFieldsThenShowError() {
         viewModel.calculate();
+
+        assertEquals("", viewModel.getResult());
         assertEquals(Status.INVALID_INPUT.toString(), viewModel.getStatus());
     }
 
@@ -48,8 +50,9 @@ public class ViewModelTest {
     public void whenCalculateWithInvalidInputThenShowError() {
         viewModel.getParameters().get(0).setValue("1.2.3");
         viewModel.getParameters().get(0).setValue("52a");
-
         viewModel.calculate();
+
+        assertEquals("", viewModel.getResult());
         assertEquals(Status.INVALID_INPUT.toString(), viewModel.getStatus());
     }
 
@@ -57,8 +60,8 @@ public class ViewModelTest {
     public void whenCalculateSquarePyramidThenShowResult() {
         viewModel.getParameters().get(0).setValue("1");
         viewModel.getParameters().get(1).setValue("1");
-
         viewModel.calculate();
+
         assertEquals(Status.OK.toString(), viewModel.getStatus());
         assertEquals(String.valueOf(1 + 2 * Math.sqrt(0.75)), viewModel.getResult());
     }
@@ -80,8 +83,19 @@ public class ViewModelTest {
     public void whenCalculateSphereThenShowResult() {
         viewModel.setSelectedShape(ShapeType.SPHERE);
         viewModel.getParameters().get(0).setValue("1");
-
         viewModel.calculate();
+
+        assertEquals(Status.OK.toString(), viewModel.getStatus());
+        assertEquals("12.566370614359172", viewModel.getResult());
+    }
+
+    @Test
+    public void whenCalculateInvalidInputAndChangeShapeAndValidInputThenShowResult() {
+        viewModel.calculate();
+        viewModel.setSelectedShape(ShapeType.SPHERE);
+        viewModel.getParameters().get(0).setValue("1");
+        viewModel.calculate();
+
         assertEquals(Status.OK.toString(), viewModel.getStatus());
         assertEquals("12.566370614359172", viewModel.getResult());
     }

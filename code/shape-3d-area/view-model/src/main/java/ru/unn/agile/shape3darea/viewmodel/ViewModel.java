@@ -101,7 +101,9 @@ public final class ViewModel {
             }
             Shape shape = shapeCreator.create(shapeClass, parameters);
             result.set(String.valueOf(shape.getArea()));
+            status.set(Status.OK.toString());
         } catch (Exception e) {
+            result.set("");
             status.set(Status.INVALID_INPUT.toString());
         }
     }
