@@ -6,32 +6,26 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import ru.unn.agile.shape3darea.model.Shape;
 import ru.unn.agile.shape3darea.model.ShapeType;
+import ru.unn.agile.shape3darea.model.Sphere;
+import ru.unn.agile.shape3darea.model.SquarePyramid;
 
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
-enum Status {
-    OK("Ok"),
-    EMPTY_DATA("No data"),
-    BAD_FORMAT("Invalid format");
-
-    private final String name;
-
-    Status(final String name) {
-        this.name = name;
-    }
-
-    public String toString() {
-        return name;
-    }
-}
+import static java.util.Collections.singletonList;
 
 public final class ViewModel {
+    private static final String SQUARE_SIDE = "squareSide";
+    private static final String TRIANGLE_SIDE = "triangleSide";
+    private static final String RADIUS = "radius";
+
+    private final ShapeCreator shapeCreator = new ShapeCreator();
+
     private final ObservableList<ShapeType> shapes = FXCollections.observableList(Arrays.asList(ShapeType.values()));
 
     private final ObjectProperty<ShapeType> selectedShape = new SimpleObjectProperty<>();
-    private final ObservableList<ParameterRow> parameters = FXCollections.observableArrayList();
+    private final ObservableList<ShapeParameter> parameters = FXCollections.observableArrayList();
 
     private final StringProperty result = new SimpleStringProperty();
     private final StringProperty status = new SimpleStringProperty();
@@ -40,13 +34,22 @@ public final class ViewModel {
         selectedShape.addListener((observable, oldValue, newValue) -> updateParameters(newValue));
 
         selectedShape.set(ShapeType.SQUARE_PYRAMID);
-        result.setValue("");
-        status.setValue(Status.EMPTY_DATA.toString());
+        result.set("");
+        status.set(Status.OK.toString());
     }
 
     private void updateParameters(ShapeType shapeType) {
-        parameters.setAll(shapeType.getFactory().getParameters()
-                .stream().map(ParameterRow::new).collect(Collectors.toList()));
+        switch (shapeType) {
+            case SQUARE_PYRAMID:
+                parameters.setAll(Arrays.asList(
+                        new ShapeParameter(double.class, SQUARE_SIDE),
+                        new ShapeParameter(double.class, TRIANGLE_SIDE)
+                ));
+                break;
+            case SPHERE:
+                parameters.setAll(singletonList(new ShapeParameter(double.class, RADIUS)));
+                break;
+        }
     }
 
     public ObservableList<ShapeType> getShapes() {
@@ -57,11 +60,15 @@ public final class ViewModel {
         return selectedShape.get();
     }
 
+    public void setSelectedShape(ShapeType selectedShape) {
+        this.selectedShape.set(selectedShape);
+    }
+
     public ObjectProperty<ShapeType> selectedShapeProperty() {
         return selectedShape;
     }
 
-    public ObservableList<ParameterRow> getParameters() {
+    public ObservableList<ShapeParameter> getParameters() {
         return parameters;
     }
 
@@ -82,6 +89,20 @@ public final class ViewModel {
     }
 
     public void calculate() {
-
+        try {
+            Class<? extends Shape> shapeClass = null;
+            switch (selectedShape.get()) {
+                case SQUARE_PYRAMID:
+                    shapeClass = SquarePyramid.class;
+                    break;
+                case SPHERE:
+                    shapeClass = Sphere.class;
+                    break;
+            }
+            Shape shape = shapeCreator.create(shapeClass, parameters);
+            result.set(String.valueOf(shape.getArea()));
+        } catch (Exception e) {
+            status.set(Status.INVALID_INPUT.toString());
+        }
     }
 }

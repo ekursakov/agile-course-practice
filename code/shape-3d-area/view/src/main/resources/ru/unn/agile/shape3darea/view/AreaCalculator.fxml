@@ -28,11 +28,16 @@
                           HBox.hgrow="ALWAYS"
                           items="${viewModel.shapes}"/>
             </HBox>
-            <TableView fx:id="tvParameters" editable="true" items="${viewModel.parameters}">
+            <TableView editable="true" items="${viewModel.parameters}">
                 <columns>
                     <TableColumn text="Name">
                         <cellValueFactory>
                             <PropertyValueFactory property="name"/>
+                        </cellValueFactory>
+                    </TableColumn>
+                    <TableColumn text="Type">
+                        <cellValueFactory>
+                            <PropertyValueFactory property="type"/>
                         </cellValueFactory>
                     </TableColumn>
                     <TableColumn text="Value">
@@ -46,7 +51,8 @@
                 </columns>
             </TableView>
             <Button fx:id="btnCalc" maxWidth="Infinity" text="Calculate"/>
-            <Label fx:id="lbResult"/>
+            <Label text="${viewModel.result}"/>
+            <Label text="${viewModel.status}"/>
         </VBox>
     </center>
 </BorderPane>
